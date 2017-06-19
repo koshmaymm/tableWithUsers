@@ -2,7 +2,7 @@
 
     var dataMass = [
         [
-            ["Петров Пётр"],
+            ["Пётр Петров"],
             ["Санкт-Петербург"],
             ["petrov@mail.ru"]
         ],
@@ -37,9 +37,11 @@
             ["knyazev@mail.ru"]
         ]
     ];
+
     let count = 0;
     let tableBody = document.getElementById("tbody");
-    var countUsers = 0;
+    var countUsersToDel;
+
     var addUserButton = document.getElementById("addUser");
     var showUserButton = document.getElementById("showUser");
     var editUserButton = document.getElementById("editUser");
@@ -64,20 +66,8 @@
     }
 
     function checkData(e) {
-        if (e.target !== "input") {
-            return;
-        }
-        console.log(e.target);
-        var data = document.querySelectorAll(".okRadio");
-
-        for (var i = 0; i < dataMass.length; i++) {
-            if (data[i] == "undefined") {
-                continue;
-            }
-            if (data[i].checked) {
-                countUsers = data[i].value;
-            }
-        }
+        if (e.target.value == undefined) { return; }
+        countUsersToDel = e.target.value;
     }
 
     function getNewTR() {
@@ -98,26 +88,25 @@
         count++;
         rad.classList.add("okRadio");
         return rad;
-
     }
 
 
     function addUser() {
-        if (countUsers == undefined) {
+        if (countUsersToDel == undefined) {
             return;
         } else {
             hideBox();
-            alert(dataMass[countUsers][0] + " - Was added to the registration queue");
+            alert(dataMass[countUsersToDel][0] + " - Was added to the registration queue");
         }
     }
 
     function showUser() {
-        if (countUsers == undefined) {
+        if (countUsersToDel == undefined) {
             return;
         } else {
-            var name = "Господин " + dataMass[countUsers][0];
-            var city = "Город " + dataMass[countUsers][1];
-            var mail = "e-mail: " + dataMass[countUsers][2];
+            var name = "Господин " + dataMass[countUsersToDel][0];
+            var city = "Город " + dataMass[countUsersToDel][1];
+            var mail = "e-mail: " + dataMass[countUsersToDel][2];
 
             userFromTableName.innerHTML = name;
             userFromTableCity.innerHTML = city;
@@ -131,11 +120,12 @@
     }
 
     function delUser(e) {
-        if (countUsers == undefined) {
+        if (countUsersToDel == undefined) {
             return;
         } else {
             hideBox();
-            tbody.children[countUsers].remove();
+            tbody.children[countUsersToDel].remove();
+            countUsersToDel = undefined;
         }
     }
 
