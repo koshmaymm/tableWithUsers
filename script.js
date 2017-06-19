@@ -1,6 +1,6 @@
 (window.unload = function() {
 
-    var dataMass = [
+    let dataMass = [
         [
             ["Пётр Петров"],
             ["Санкт-Петербург"],
@@ -39,13 +39,13 @@
     ];
 
     let count = 0;
+    let countUsersToDel;
     let tableBody = document.getElementById("tbody");
-    var countUsersToDel;
 
-    var addUserButton = document.getElementById("addUser");
-    var showUserButton = document.getElementById("showUser");
-    var editUserButton = document.getElementById("editUser");
-    var deltUserButton = document.getElementById("deltUser");
+    let addUserButton = document.getElementById("addUser");
+    let showUserButton = document.getElementById("showUser");
+    let editUserButton = document.getElementById("editUser");
+    let deltUserButton = document.getElementById("deltUser");
 
 
     function showUsers() {
@@ -53,9 +53,11 @@
             let tr = getNewTR();
 
             for (let a = -1; a < dataMass[i].length; a++) {
-                let td = getNewTD();
+                let td = getNewTD(); /*'<span>glyphicon glyphicon-envelope</span>'*/
                 if (a === -1) {
                     td.appendChild(getNewCheckboks());
+                } else if (a === 2) {
+                    td = getNewTDWithGliphicon(dataMass[i][a]);
                 } else {
                     td.innerHTML = dataMass[i][a];
                 }
@@ -66,7 +68,9 @@
     }
 
     function checkData(e) {
-        if (e.target.value == undefined) { return; }
+        if (e.target.value == undefined) {
+            return;
+        }
         countUsersToDel = e.target.value;
     }
 
@@ -80,8 +84,19 @@
         return td;
     }
 
+    function getNewTDWithGliphicon(a) {
+        let td = document.createElement('td');
+        let span = document.createElement('span');
+        span.classList.add("glyphicon");
+        span.classList.add("glyphicon-envelope");
+        span.innerHTML = " " + a;
+        td.appendChild(span)
+
+        return td;
+    }
+
     function getNewCheckboks() {
-        var rad = document.createElement('input');
+        let rad = document.createElement('input');
         rad.type = "radio";
         rad.name = "radioName";
         rad.value = count;
@@ -104,9 +119,9 @@
         if (countUsersToDel == undefined) {
             return;
         } else {
-            var name = "Господин " + dataMass[countUsersToDel][0];
-            var city = "Город " + dataMass[countUsersToDel][1];
-            var mail = "e-mail: " + dataMass[countUsersToDel][2];
+            let name = "Господин " + dataMass[countUsersToDel][0];
+            let city = "Город " + dataMass[countUsersToDel][1];
+            let mail = "e-mail: " + dataMass[countUsersToDel][2];
 
             userFromTableName.innerHTML = name;
             userFromTableCity.innerHTML = city;
@@ -126,13 +141,22 @@
             hideBox();
             tbody.children[countUsersToDel].remove();
             countUsersToDel = undefined;
+            /* */
+        }
+    }
+
+    function editUser() {
+        if (countUsersToDel == undefined) {
+            return;
+        } else {
+            console.log("HI");
         }
     }
 
     tableBody.addEventListener("click", checkData, false);
     addUserButton.addEventListener("click", addUser, false);
     showUserButton.addEventListener("click", showUser, false);
-    editUserButton.addEventListener("click", addUser, false);
+    editUserButton.addEventListener("click", editUser, false);
     deltUserButton.addEventListener("click", delUser, false);
 
     showUsers();
