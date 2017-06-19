@@ -63,7 +63,11 @@
         }
     }
 
-    function checkData() {
+    function checkData(e) {
+        if (e.target !== "input") {
+            return;
+        }
+        console.log(e.target);
         var data = document.querySelectorAll(".okRadio");
 
         for (var i = 0; i < dataMass.length; i++) {
