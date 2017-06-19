@@ -131,26 +131,11 @@
             return;
         } else {
             hideBox();
-            console.log("HI");
-            console.log(dataMass[countUsers]);
-            console.log(tbody.children[countUsers]);
             tbody.children[countUsers].remove();
-
-            var container = dataMass[countUsers];
-
-            while (container.firstChild) {
-                container.removeChild(container.firstChild);
-            }
-
-
         }
-
     }
 
-
-
     tableBody.addEventListener("click", checkData, false);
-
     addUserButton.addEventListener("click", addUser, false);
     showUserButton.addEventListener("click", showUser, false);
     editUserButton.addEventListener("click", addUser, false);
