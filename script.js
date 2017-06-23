@@ -62,6 +62,7 @@
                     td.innerHTML = dataMass[i][a];
                 }
                 tr.appendChild(td);
+                tr.classList.add("success");
             }
             tableBody.appendChild(tr);
         }
@@ -101,7 +102,7 @@
         rad.name = "radioName";
         rad.value = count;
         count++;
-        rad.classList.add("okRadio");
+        rad.classList.add("danger");
         return rad;
     }
 
@@ -139,9 +140,7 @@
             return;
         } else {
             hideBox();
-            tbody.children[countUsersToDel].remove();
-            countUsersToDel = undefined;
-            /* */
+            tbody.children[countUsersToDel].classList.add("hidePerson");
         }
     }
 
