@@ -50,3 +50,7 @@ button {
 #popup {
     opacity: 0;
 }
+
+.hidePerson {
+    display: none;
+}
