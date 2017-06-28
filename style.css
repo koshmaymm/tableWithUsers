@@ -54,3 +54,7 @@ button {
 .hidePerson {
     display: none;
 }
+
+.thead {
+    background-color: #AFEEEE;
+}
