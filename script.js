@@ -102,7 +102,6 @@
         rad.name = "radioName";
         rad.value = count;
         count++;
-        rad.classList.add("danger");
         return rad;
     }
 
